@@ -10,6 +10,8 @@ import {
 import {IFilms, storageTypes} from '../types';
 import {useDispatch} from 'react-redux';
 import {InfoItem} from './InfoItem';
+import {SvgXml} from 'react-native-svg';
+import {close} from '../Components/svgs';
 const {width} = Dimensions.get('window');
 interface IProps {
   item: IFilms;
@@ -34,11 +36,14 @@ export const RenderItem: FC<IProps> = ({item}) => {
         </TouchableOpacity>
       </View>
       <Modal animationType="slide" visible={visible}>
-        <TouchableOpacity
-          style={styles.header}
-          onPress={() => setVisible(false)}>
-          <Text>Close Modal</Text>
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.close}
+            onPress={() => setVisible(false)}>
+            <SvgXml width={20} height={20} xml={close} />
+          </TouchableOpacity>
+        </View>
+
         <InfoItem
           onAddBlackList={() => {
             dispatch({
@@ -76,4 +81,13 @@ const styles = StyleSheet.create({
   },
   textPosition: {textAlign: 'center', marginVertical: 5, paddingHorizontal: 5},
   alignCenter: {alignItems: 'center'},
+  close: {
+    margin: 10,
+    width: 30,
+    height: 30,
+    borderRadius: 5,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
